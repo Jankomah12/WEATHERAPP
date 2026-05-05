@@ -6,6 +6,10 @@
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#1a1a2e">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Weather App">
+    <link rel="apple-touch-icon" href="/static/icon.png">
     <style>
         * {
             margin: 0;
@@ -52,6 +56,7 @@
             display: flex;
             gap: 10px;
             justify-content: center;
+            flex-wrap: wrap;
         }
         .search-form input {
             padding: 15px 25px;
@@ -223,28 +228,55 @@
             font-size: 14px;
             line-height: 1.6;
         }
+        .install-banner {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        .install-banner p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .install-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+        .install-btn:hover {
+            background: white;
+            color: #f39c12;
+        }
         .footer {
             text-align: center;
             padding: 30px;
             opacity: 0.5;
             font-size: 14px;
         }
-        .install-btn {
-            display: none;
-            width: 100%;
-            padding: 15px;
-            border-radius: 50px;
-            border: none;
-            background: linear-gradient(135deg, #f39c12, #e74c3c);
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px;
-            transition: transform 0.3s;
-        }
-        .install-btn:hover {
-            transform: translateY(-3px);
+        @media (max-width: 600px) {
+            .temperature {
+                font-size: 50px;
+            }
+            .city-name {
+                font-size: 20px;
+            }
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            .forecast-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .search-form input {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -253,11 +285,12 @@
         <h1>Smart Weather App</h1>
     </div>
     <div class="container">
-        <button class="install-btn" id="installBtn">
-            📱 Install App on Your Phone!
-        </button>
+        <div class="install-banner" id="installBanner">
+            <p>Install this app on your phone for quick access!</p>
+            <button class="install-btn" id="installBtn">Install App</button>
+        </div>
         <div class="search-box">
-            <h2>Check The Weather </h2>
+            <h2>Check The Weather</h2>
             <p>Get weather updates with smart tips for your day!</p>
             <form class="search-form" method="POST" action="/">
                 <input type="text" name="city" placeholder="Enter city name..." required/>
@@ -266,14 +299,14 @@
         </div>
         {% if error %}
         <div class="error">
-             {{ error }}
+            {{ error }}
         </div>
         {% endif %}
         {% if weather %}
         <div class="weather-card">
             <div class="weather-main">
                 <div>
-                    <div class="city-name"> {{ weather.city }}, {{ weather.country }}</div>
+                    <div class="city-name">{{ weather.city }}, {{ weather.country }}</div>
                     <div class="temperature">{{ weather.temp }}°C</div>
                     <div class="condition">{{ weather.condition }}</div>
                 </div>
@@ -324,7 +357,7 @@
                 <p>{{ weather.outfit }}</p>
             </div>
             <div class="tip-card">
-                <h3> FARMER ADVISOR</h3>
+                <h3>FARMER ADVISOR</h3>
                 <p>{{ weather.farmer_tip }}</p>
             </div>
             <div class="tip-card">
@@ -346,14 +379,14 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installBtn').style.display = 'block';
+            document.getElementById('installBanner').style.display = 'block';
         });
         document.getElementById('installBtn').addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const result = await deferredPrompt.userChoice;
                 deferredPrompt = null;
-                document.getElementById('installBtn').style.display = 'none';
+                document.getElementById('installBanner').style.display = 'none';
             }
         });
         if ('serviceWorker' in navigator) {
