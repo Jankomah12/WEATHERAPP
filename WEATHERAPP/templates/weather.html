@@ -212,7 +212,7 @@
 </head>
 <body id="body" class="bg-night">
     <div class="navbar">
-        <h1>🌤️ <span class="en">Smart Weather</span><span class="tw">Adeɛ Tɔ Nhwɛso</span></h1>
+        <h1> <span class="en">Smart Weather</span><span class="tw">Adeɛ Tɔ Nhwɛso</span></h1>
         <div class="lang-toggle">
             <button class="lang-btn active" id="enBtn" onclick="setLang('en')">EN</button>
             <button class="lang-btn" id="twBtn" onclick="setLang('tw')">TWI</button>
@@ -237,28 +237,28 @@
         </div>
 
         {% if error %}
-        <div class="error">❌ {{ error }}</div>
+        <div class="error"> {{ error }}</div>
         {% endif %}
 
         {% if weather %}
         <div class="card">
-            <div class="weather-icon" id="weatherIcon">⛅</div>
-            <div class="city-name">📍 {{ weather.city }}, {{ weather.country }}</div>
+            <div class="weather-icon" id="weatherIcon"></div>
+            <div class="city-name"> {{ weather.city }}, {{ weather.country }}</div>
             <div class="condition">{{ weather.condition }}</div>
             <div class="temperature">{{ weather.temp }}°C</div>
             <div class="weather-details">
                 <div class="detail-card">
-                    <div class="icon">🌡️</div>
+                    <div class="icon"></div>
                     <div class="label"><span class="en">Feels Like</span><span class="tw">Hu Sɛ</span></div>
                     <div class="value">{{ weather.feels_like }}°C</div>
                 </div>
                 <div class="detail-card">
-                    <div class="icon">💧</div>
+                    <div class="icon"></div>
                     <div class="label"><span class="en">Humidity</span><span class="tw">Nsuo Mu</span></div>
                     <div class="value">{{ weather.humidity }}%</div>
                 </div>
                 <div class="detail-card">
-                    <div class="icon">💨</div>
+                    <div class="icon"></div>
                     <div class="label"><span class="en">Wind</span><span class="tw">Mframa</span></div>
                     <div class="value">{{ weather.wind_speed }}m/s</div>
                 </div>
@@ -267,8 +267,8 @@
 
         <div class="card">
             <div class="card-title">
-                <span class="en">🌧️ Rainfall Forecast</span>
-                <span class="tw">🌧️ Osuo Ba Nhwɛso</span>
+                <span class="en"> Rainfall Forecast</span>
+                <span class="tw"> Osuo Ba Nhwɛso</span>
             </div>
             <p>{{ weather.rain_alert }}</p>
             <div class="rain-percentage">{{ weather.rain_chance }}%</div>
@@ -284,8 +284,8 @@
         {% if weather.forecast %}
         <div class="card">
             <div class="card-title">
-                <span class="en">📅 3 Day Forecast</span>
-                <span class="tw">📅 Nnɛ Abiɛsa Nhwɛso</span>
+                <span class="en"> 3 Day Forecast</span>
+                <span class="tw"> Nnɛ Abiɛsa Nhwɛso</span>
             </div>
             <div class="forecast-grid">
                 {% for day in weather.forecast %}
@@ -293,7 +293,7 @@
                     <div class="date">{{ day.date }}</div>
                     <div class="temp">{{ day.temp }}°C</div>
                     <div class="cond">{{ day.condition }}</div>
-                    <div class="rain">🌧️ {{ day.rain_chance }}%</div>
+                    <div class="rain"> {{ day.rain_chance }}%</div>
                 </div>
                 {% endfor %}
             </div>
@@ -302,36 +302,36 @@
 
         <div class="card">
             <div class="card-title">
-                <span class="en">🌱 Crop Specific Advice</span>
-                <span class="tw">🌱 Aba Ho Akwankyerɛ</span>
+                <span class="en"> Crop Specific Advice</span>
+                <span class="tw"> Aba Ho Akwankyerɛ</span>
             </div>
             <form method="POST" action="/" id="cropForm">
                 <input type="hidden" name="lang" value="{{ selected_lang }}">
                 <input type="hidden" name="city" value="{{ weather.city }}">
                 <select class="crop-select" name="crop" onchange="document.getElementById('cropForm').submit()">
                     <option value="">-- Select Your Crop --</option>
-                    <optgroup label="🌾 Cereals & Grains">
+                    <optgroup label=" Cereals & Grains">
                         <option value="Maize" {% if selected_crop == 'Maize' %}selected{% endif %}>Maize</option>
                         <option value="Rice" {% if selected_crop == 'Rice' %}selected{% endif %}>Rice</option>
                         <option value="Sorghum" {% if selected_crop == 'Sorghum' %}selected{% endif %}>Sorghum</option>
                         <option value="Millet" {% if selected_crop == 'Millet' %}selected{% endif %}>Millet</option>
                         <option value="Fonio" {% if selected_crop == 'Fonio' %}selected{% endif %}>Fonio</option>
                     </optgroup>
-                    <optgroup label="🥔 Root & Tuber Crops">
+                    <optgroup label=" Root & Tuber Crops">
                         <option value="Yam" {% if selected_crop == 'Yam' %}selected{% endif %}>Yam</option>
                         <option value="Cassava" {% if selected_crop == 'Cassava' %}selected{% endif %}>Cassava</option>
                         <option value="Cocoyam" {% if selected_crop == 'Cocoyam' %}selected{% endif %}>Cocoyam</option>
                         <option value="Sweet Potato" {% if selected_crop == 'Sweet Potato' %}selected{% endif %}>Sweet Potato</option>
                         <option value="Irish Potato" {% if selected_crop == 'Irish Potato' %}selected{% endif %}>Irish Potato</option>
                     </optgroup>
-                    <optgroup label="🫘 Legumes">
+                    <optgroup label=" Legumes">
                         <option value="Groundnut" {% if selected_crop == 'Groundnut' %}selected{% endif %}>Groundnut</option>
                         <option value="Cowpea (Beans)" {% if selected_crop == 'Cowpea (Beans)' %}selected{% endif %}>Cowpea (Beans)</option>
                         <option value="Soybean" {% if selected_crop == 'Soybean' %}selected{% endif %}>Soybean</option>
                         <option value="Bambara Bean" {% if selected_crop == 'Bambara Bean' %}selected{% endif %}>Bambara Bean</option>
                         <option value="Pigeon Pea" {% if selected_crop == 'Pigeon Pea' %}selected{% endif %}>Pigeon Pea</option>
                     </optgroup>
-                    <optgroup label="🌴 Tree & Cash Crops">
+                    <optgroup label=" Tree & Cash Crops">
                         <option value="Cocoa" {% if selected_crop == 'Cocoa' %}selected{% endif %}>Cocoa</option>
                         <option value="Oil Palm" {% if selected_crop == 'Oil Palm' %}selected{% endif %}>Oil Palm</option>
                         <option value="Coconut" {% if selected_crop == 'Coconut' %}selected{% endif %}>Coconut</option>
@@ -340,7 +340,7 @@
                         <option value="Coffee" {% if selected_crop == 'Coffee' %}selected{% endif %}>Coffee</option>
                         <option value="Cola Nut" {% if selected_crop == 'Cola Nut' %}selected{% endif %}>Cola Nut</option>
                     </optgroup>
-                    <optgroup label="🍌 Fruits">
+                    <optgroup label=" Fruits">
                         <option value="Plantain" {% if selected_crop == 'Plantain' %}selected{% endif %}>Plantain</option>
                         <option value="Banana" {% if selected_crop == 'Banana' %}selected{% endif %}>Banana</option>
                         <option value="Mango" {% if selected_crop == 'Mango' %}selected{% endif %}>Mango</option>
@@ -352,7 +352,7 @@
                         <option value="Guava" {% if selected_crop == 'Guava' %}selected{% endif %}>Guava</option>
                         <option value="Soursop" {% if selected_crop == 'Soursop' %}selected{% endif %}>Soursop</option>
                     </optgroup>
-                    <optgroup label="🥦 Vegetables">
+                    <optgroup label=" Vegetables">
                         <option value="Tomato" {% if selected_crop == 'Tomato' %}selected{% endif %}>Tomato</option>
                         <option value="Pepper (Chilli & Bell)" {% if selected_crop == 'Pepper (Chilli & Bell)' %}selected{% endif %}>Pepper (Chilli & Bell)</option>
                         <option value="Onion" {% if selected_crop == 'Onion' %}selected{% endif %}>Onion</option>
@@ -366,13 +366,13 @@
                         <option value="Spinach" {% if selected_crop == 'Spinach' %}selected{% endif %}>Spinach</option>
                         <option value="Kontomire (Cocoyam leaves)" {% if selected_crop == 'Kontomire (Cocoyam leaves)' %}selected{% endif %}>Kontomire (Cocoyam leaves)</option>
                     </optgroup>
-                    <optgroup label="🌶️ Spices & Condiments">
+                    <optgroup label=" Spices & Condiments">
                         <option value="Ginger" {% if selected_crop == 'Ginger' %}selected{% endif %}>Ginger</option>
                         <option value="Turmeric" {% if selected_crop == 'Turmeric' %}selected{% endif %}>Turmeric</option>
                         <option value="Garlic" {% if selected_crop == 'Garlic' %}selected{% endif %}>Garlic</option>
                         <option value="Chilli Pepper" {% if selected_crop == 'Chilli Pepper' %}selected{% endif %}>Chilli Pepper</option>
                     </optgroup>
-                    <optgroup label="🌿 Fiber Crops">
+                    <optgroup label=" Fiber Crops">
                         <option value="Cotton" {% if selected_crop == 'Cotton' %}selected{% endif %}>Cotton</option>
                     </optgroup>
                 </select>
@@ -384,8 +384,8 @@
 
         <div class="card">
             <div class="card-title">
-                <span class="en">⚠️ Crop Disease & Pest Risk</span>
-                <span class="tw">⚠️ Aba Yare Ne Nnipa Bone Nsɛm</span>
+                <span class="en"> Crop Disease & Pest Risk</span>
+                <span class="tw"> Aba Yare Ne Nnipa Bone Nsɛm</span>
             </div>
             {% for key, risk in weather.disease_risks.items() %}
             <div class="risk-item">
@@ -396,35 +396,35 @@
                 <div class="risk-bar">
                     <div class="risk-bar-fill" style="width: {{ risk.risk }}%; background: {{ risk.color }};"></div>
                 </div>
-                <div class="risk-tip">💡 {{ risk.tip }}</div>
+                <div class="risk-tip"> {{ risk.tip }}</div>
             </div>
             {% endfor %}
         </div>
 
         <div class="tip-card">
             <div class="tip-header">
-                <div class="tip-icon">👔</div>
+                <div class="tip-icon"></div>
                 <div class="tip-title"><span class="en">Outfit Suggestion</span><span class="tw">Ntade Ho Afotu</span></div>
             </div>
             <div class="tip-text">{{ weather.outfit }}</div>
         </div>
         <div class="tip-card">
             <div class="tip-header">
-                <div class="tip-icon">🌾</div>
+                <div class="tip-icon"></div>
                 <div class="tip-title"><span class="en">Farmer Advisor</span><span class="tw">Okuani Akwankyerɛ</span></div>
             </div>
             <div class="tip-text">{{ weather.farmer_tip }}</div>
         </div>
         <div class="tip-card">
             <div class="tip-header">
-                <div class="tip-icon">🏃</div>
+                <div class="tip-icon"></div>
                 <div class="tip-title"><span class="en">Activity Suggester</span><span class="tw">Adwuma Ho Afotu</span></div>
             </div>
             <div class="tip-text">{{ weather.activity }}</div>
         </div>
         <div class="tip-card">
             <div class="tip-header">
-                <div class="tip-icon">💊</div>
+                <div class="tip-icon"></div>
                 <div class="tip-title"><span class="en">Health Advisor</span><span class="tw">Apɔmuden Akwankyerɛ</span></div>
             </div>
             <div class="tip-text">{{ weather.health_tip }}</div>
@@ -432,7 +432,7 @@
         {% endif %}
     </div>
     <div class="footer">
-        <p>Built with PASSION by Ankomah Joel from Kumasi, Ghana 🇬🇭</p>
+        <p>Built with PASSION by Ankomah Joel from Kumasi, Ghana </p>
     </div>
     <script>
         const condition = "{{ weather.condition if weather else '' }}".toLowerCase();
@@ -442,22 +442,22 @@
         if (condition) {
             if (condition.includes('rain') || condition.includes('drizzle')) {
                 body.className = 'bg-rainy';
-                if(icon) icon.textContent = '🌧️';
+                if(icon) icon.textContent = '';
             } else if (condition.includes('cloud')) {
                 body.className = 'bg-cloudy';
-                if(icon) icon.textContent = '☁️';
+                if(icon) icon.textContent = '';
             } else if (condition.includes('clear') || condition.includes('sun')) {
                 body.className = 'bg-sunny';
-                if(icon) icon.textContent = '☀️';
+                if(icon) icon.textContent = '';
             } else if (condition.includes('thunder')) {
                 body.className = 'bg-rainy';
-                if(icon) icon.textContent = '⛈️';
+                if(icon) icon.textContent = '';
             } else if (condition.includes('snow')) {
                 body.className = 'bg-cloudy';
-                if(icon) icon.textContent = '❄️';
+                if(icon) icon.textContent = '';
             } else if (condition.includes('mist') || condition.includes('fog')) {
                 body.className = 'bg-cloudy';
-                if(icon) icon.textContent = '🌫️';
+                if(icon) icon.textContent = '';
             }
         }
 
